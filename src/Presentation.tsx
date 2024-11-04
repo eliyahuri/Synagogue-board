@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Welcome from "./pages/Welcome";
-import Zmanim from "./pages/Zmanim";
+import ZmaniShavua from "./pages/ZmaniShavua";
+import ZmaniYom from "./pages/ZmaniYom";
 
 const pages = [
   <Welcome synagogueName="היכל רחמים" />,
-  <Zmanim />,
-  <div>Page 3 Content</div>,
-  // Add more pages as needed
+  <ZmaniShavua />,
+  <ZmaniYom />,
 ];
 
 const Presentation: React.FC = () => {
