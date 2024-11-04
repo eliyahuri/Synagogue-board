@@ -1,1 +1,1 @@
-# Synagogue-board
+react typescript Synagogue Board for it
