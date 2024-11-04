@@ -3,35 +3,51 @@ import { GeoLocation, ZmanimCalendar } from "kosher-zmanim";
 import { DateTime } from "luxon";
 import { useEffect, useState } from "react";
 
+interface ZmanimTimes {
+  netz: string;
+  shacharit: string;
+  kriatShema: string;
+  mincha: string;
+  arvit: string;
+}
+
 function ZmaniYom() {
-  const [zmanimTimes, setZmanimTimes] = useState<Record<string, string | null>>(
-    {}
-  );
+  const [zmanimTimes, setZmanimTimes] = useState<ZmanimTimes>({
+    netz: "לא זמין",
+    shacharit: "לא זמין",
+    kriatShema: "לא זמין",
+    mincha: "לא זמין",
+    arvit: "לא זמין",
+  });
 
   useEffect(() => {
-    const zmanimLocation = new GeoLocation(
-      "Tiberias",
-      32.795,
-      35.529,
-      0,
-      "Asia/Jerusalem"
-    );
+    try {
+      const zmanimLocation = new GeoLocation(
+        "Tiberias",
+        32.795,
+        35.529,
+        0,
+        "Asia/Jerusalem"
+      );
 
-    const zmanimCalendar = new ZmanimCalendar(zmanimLocation);
+      const zmanimCalendar = new ZmanimCalendar(zmanimLocation);
 
-    const getTimeString = (time: DateTime | null) => {
-      if (!time) return "לא זמין";
-      return time.setZone("Asia/Jerusalem").toFormat("HH:mm");
-    };
+      const getTimeString = (time: DateTime | null) => {
+        if (!time) return "לא זמין";
+        return time.setZone("Asia/Jerusalem").toFormat("HH:mm");
+      };
 
-    const zmanim = {
-      netz: getTimeString(zmanimCalendar.getSunrise()),
-      shacharit: getTimeString(zmanimCalendar.getSofZmanShmaMGA()),
-      kriatShema: getTimeString(zmanimCalendar.getSofZmanShmaGRA()),
-      mincha: getTimeString(zmanimCalendar.getMinchaGedola()),
-      arvit: getTimeString(zmanimCalendar.getTzais()),
-    };
-    setZmanimTimes(zmanim);
+      const zmanim = {
+        netz: getTimeString(zmanimCalendar.getSunrise()),
+        shacharit: getTimeString(zmanimCalendar.getSofZmanShmaMGA()),
+        kriatShema: getTimeString(zmanimCalendar.getSofZmanShmaGRA()),
+        mincha: getTimeString(zmanimCalendar.getMinchaGedola()),
+        arvit: getTimeString(zmanimCalendar.getTzais()),
+      };
+      setZmanimTimes(zmanim);
+    } catch (error) {
+      console.error("Error fetching zmanim times:", error);
+    }
   }, []);
 
   return (

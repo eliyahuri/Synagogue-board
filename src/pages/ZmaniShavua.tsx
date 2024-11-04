@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // ZmaniShavua.tsx
-import { CalOptions, HebrewCalendar, Location } from "@hebcal/core";
+import { CalOptions, HebrewCalendar, Location, Event } from "@hebcal/core";
 import { useEffect, useState } from "react";
 
 function removeNikud(text: string): string {
@@ -8,27 +7,37 @@ function removeNikud(text: string): string {
 }
 
 function ZmaniShavua() {
-  const [events, setEvents] = useState<any[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
-    const start = new Date();
-    const end = new Date();
-    end.setDate(start.getDate() + 7); // Get events for the upcoming week
+    const fetchEvents = async () => {
+      try {
+        const start = new Date();
+        const end = new Date();
+        end.setDate(start.getDate() + 7); // Get events for the upcoming week
 
-    const options: CalOptions = {
-      location: Location.lookup("Tiberias"),
-      molad: true,
-      candlelighting: true,
-      month: start.getMonth() + 1,
-      omer: true,
-      sedrot: true,
-      start,
-      end,
-      locale: "he",
+        const location = await Location.lookup("Tiberias");
+
+        const options: CalOptions = {
+          location,
+          molad: true,
+          candlelighting: true,
+          month: start.getMonth() + 1,
+          omer: true,
+          sedrot: true,
+          start,
+          end,
+          locale: "he",
+        };
+
+        const calendarEvents = HebrewCalendar.calendar(options);
+        setEvents(calendarEvents);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
     };
 
-    const calendarEvents = HebrewCalendar.calendar(options);
-    setEvents(calendarEvents);
+    fetchEvents();
   }, []);
 
   return (
