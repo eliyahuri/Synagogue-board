@@ -42,7 +42,7 @@ function ZmaniShavua() {
 
   return (
     <div>
-      <h2>אירועי השבוע</h2>
+      <h2 className="text-yellow-400 text-9xl">אירועי השבוע</h2>
       {events.map((item) => (
         <div key={`${item.desc}-${item.date}`}>
           {removeNikud(item.render())}

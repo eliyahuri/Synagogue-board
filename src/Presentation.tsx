@@ -15,7 +15,7 @@ const Presentation: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentPage((prevPage) => (prevPage + 1) % pages.length);
-    }, 10000); // 10000 ms = 10 seconds
+    }, 5000);
 
     return () => clearInterval(interval); // Clean up on component unmount
   }, []);

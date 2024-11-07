@@ -12,6 +12,7 @@ interface ZmanimTimes {
 }
 
 function ZmaniYom() {
+  const basicClass = "text-4xl";
   const [zmanimTimes, setZmanimTimes] = useState<ZmanimTimes>({
     netz: "לא זמין",
     shacharit: "לא זמין",
@@ -52,12 +53,16 @@ function ZmaniYom() {
 
   return (
     <div>
-      <h2>זמני תפילות להיום</h2>
-      <div>נץ החמה: {zmanimTimes.netz}</div>
-      <div>זמן קריאת שמע (מגן אברהם): {zmanimTimes.shacharit}</div>
-      <div>זמן קריאת שמע (גר"א): {zmanimTimes.kriatShema}</div>
-      <div>מנחה גדולה: {zmanimTimes.mincha}</div>
-      <div>ערבית: {zmanimTimes.arvit}</div>
+      <h2 className="text-yellow-400 text-9xl">זמני תפילות להיום</h2>
+      <div className={basicClass}>נץ החמה: {zmanimTimes.netz}</div>
+      <div className={basicClass}>
+        זמן קריאת שמע (מגן אברהם): {zmanimTimes.shacharit}
+      </div>
+      <div className={basicClass}>
+        זמן קריאת שמע (גר"א): {zmanimTimes.kriatShema}
+      </div>
+      <div className={basicClass}>מנחה גדולה: {zmanimTimes.mincha}</div>
+      <div className={basicClass}>ערבית: {zmanimTimes.arvit}</div>
     </div>
   );
 }
