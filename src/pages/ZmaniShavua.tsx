@@ -1,6 +1,7 @@
 // ZmaniShavua.tsx
 import { CalOptions, HebrewCalendar, Location, Event } from "@hebcal/core";
 import { useEffect, useState } from "react";
+import { textClasses } from "../styles/classes";
 
 function removeNikud(text: string): string {
   return text.replace(/[\u0591-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7]/g, "");
@@ -42,9 +43,12 @@ function ZmaniShavua() {
 
   return (
     <div>
-      <h2 className="text-yellow-400 text-9xl">אירועי השבוע</h2>
+      <h2 className={textClasses.titleClass}>אירועי השבוע</h2>
       {events.map((item) => (
-        <div key={`${item.desc}-${item.date}`}>
+        <div
+          key={`${item.desc}-${item.date}`}
+          className={textClasses.basicText}
+        >
           {removeNikud(item.render())}
         </div>
       ))}

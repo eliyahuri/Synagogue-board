@@ -2,6 +2,7 @@
 import { GeoLocation, ZmanimCalendar } from "kosher-zmanim";
 import { DateTime } from "luxon";
 import { useEffect, useState } from "react";
+import { textClasses } from "../styles/classes";
 
 interface ZmanimTimes {
   netz: string;
@@ -12,7 +13,6 @@ interface ZmanimTimes {
 }
 
 function ZmaniYom() {
-  const basicClass = "text-4xl";
   const [zmanimTimes, setZmanimTimes] = useState<ZmanimTimes>({
     netz: "לא זמין",
     shacharit: "לא זמין",
@@ -53,16 +53,18 @@ function ZmaniYom() {
 
   return (
     <div>
-      <h2 className="text-yellow-400 text-9xl">זמני תפילות להיום</h2>
-      <div className={basicClass}>נץ החמה: {zmanimTimes.netz}</div>
-      <div className={basicClass}>
+      <h2 className={textClasses.titleClass}>זמני תפילות להיום</h2>
+      <div className={textClasses.basicText}>נץ החמה: {zmanimTimes.netz}</div>
+      <div className={textClasses.basicText}>
         זמן קריאת שמע (מגן אברהם): {zmanimTimes.shacharit}
       </div>
-      <div className={basicClass}>
+      <div className={textClasses.basicText}>
         זמן קריאת שמע (גר"א): {zmanimTimes.kriatShema}
       </div>
-      <div className={basicClass}>מנחה גדולה: {zmanimTimes.mincha}</div>
-      <div className={basicClass}>ערבית: {zmanimTimes.arvit}</div>
+      <div className={textClasses.basicText}>
+        מנחה גדולה: {zmanimTimes.mincha}
+      </div>
+      <div className={textClasses.basicText}>ערבית: {zmanimTimes.arvit}</div>
     </div>
   );
 }
