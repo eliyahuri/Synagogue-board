@@ -17,7 +17,7 @@ const Presentation: React.FC = () => {
       setCurrentPage((prevPage) => (prevPage + 1) % pages.length);
     }, 5000);
 
-    return () => clearInterval(interval); // Clean up on component unmount
+    return () => clearInterval(interval);
   }, []);
 
   return <div>{pages[currentPage]}</div>;
