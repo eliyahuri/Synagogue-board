@@ -4,7 +4,7 @@ import ZmaniShavua from "./pages/ZmaniShavua";
 import ZmaniYom from "./pages/ZmaniYom";
 
 const pages = [
-  <Welcome synagogueName="היכל רחמים" />,
+  <Welcome synagogueName="היכל רחמים" lang="he" />,
   <ZmaniShavua />,
   <ZmaniYom />,
 ];
